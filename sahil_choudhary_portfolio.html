@@ -1,0 +1,526 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal: #1D9E75; --teal-light: #E1F5EE; --teal-dark: #085041;
+  --amber: #BA7517; --amber-light: #FAEEDA;
+  --gray-light: #F1EFE8; --gray-mid: #B4B2A9;
+}
+
+body { font-family: 'DM Sans', sans-serif; background: transparent; }
+
+.portfolio {
+  width: 100%;
+  min-height: 600px;
+  background: var(--color-background-primary);
+  border-radius: var(--border-radius-lg);
+  border: 0.5px solid var(--color-border-tertiary);
+  overflow: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #085041 0%, #1D9E75 60%, #5DCAA5 100%);
+  padding: 40px 40px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+}
+
+.hero-avatar {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.5);
+  object-fit: cover;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; color: #fff; font-weight: 600;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.hero-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+.hero-text { flex: 1; }
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 600; color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.hero-title { font-size: 14px; color: rgba(255,255,255,0.75); font-weight: 300; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 12px; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  background: rgba(255,255,255,0.15);
+  border: 0.5px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px; color: #fff; font-weight: 400;
+}
+
+.upload-btn {
+  background: #fff;
+  color: #085041;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s, transform 0.1s;
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.upload-btn:hover { background: #E1F5EE; transform: scale(1.02); }
+.upload-btn svg { width: 14px; height: 14px; }
+
+/* ── NAV TABS ── */
+.tabs {
+  display: flex;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  background: var(--color-background-secondary);
+  padding: 0 32px;
+}
+.tab {
+  padding: 14px 18px;
+  font-size: 13px; font-weight: 400;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  user-select: none;
+}
+.tab.active { color: #1D9E75; border-bottom-color: #1D9E75; font-weight: 500; }
+.tab:hover:not(.active) { color: var(--color-text-primary); }
+
+/* ── CONTENT ── */
+.content { padding: 28px 32px; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.info-card {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 16px;
+}
+.info-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.info-value { font-size: 14px; color: var(--color-text-primary); font-weight: 400; }
+
+.summary-box {
+  background: #E1F5EE;
+  border-left: 3px solid #1D9E75;
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.summary-box p { font-size: 14px; color: #085041; line-height: 1.65; }
+
+/* ── SWOT ── */
+.swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.swot-card { border-radius: var(--border-radius-md); padding: 14px 16px; }
+.swot-card.S { background: #E1F5EE; border: 0.5px solid #9FE1CB; }
+.swot-card.W { background: #FAEEDA; border: 0.5px solid #FAC775; }
+.swot-card.O { background: #E6F1FB; border: 0.5px solid #B5D4F4; }
+.swot-card.T { background: #FCEBEB; border: 0.5px solid #F7C1C1; }
+.swot-label { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.swot-card.S .swot-label { color: #085041; }
+.swot-card.W .swot-label { color: #633806; }
+.swot-card.O .swot-label { color: #0C447C; }
+.swot-card.T .swot-label { color: #791F1F; }
+.swot-card ul { list-style: none; }
+.swot-card li { font-size: 13px; line-height: 1.55; margin-bottom: 5px; padding-left: 12px; position: relative; }
+.swot-card li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; font-size: 11px; top: 1px; }
+.swot-card.S li { color: #0F6E56; }
+.swot-card.W li { color: #854F0B; }
+.swot-card.O li { color: #185FA5; }
+.swot-card.T li { color: #A32D2D; }
+
+/* ── EDUCATION ── */
+.timeline { position: relative; padding-left: 20px; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 1px; background: var(--color-border-tertiary); }
+.tl-item { position: relative; margin-bottom: 20px; }
+.tl-dot { width: 13px; height: 13px; border-radius: 50%; background: #1D9E75; border: 2px solid var(--color-background-primary); position: absolute; left: -17px; top: 3px; }
+.tl-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.tl-sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 3px; }
+.tl-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.tl-tag { font-size: 11px; background: var(--color-background-secondary); color: var(--color-text-secondary); padding: 2px 8px; border-radius: 20px; border: 0.5px solid var(--color-border-tertiary); }
+.tl-tag.highlight { background: #E1F5EE; color: #085041; border-color: #9FE1CB; }
+
+/* ── SKILLS ── */
+.skills-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.skill-pill {
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  font-weight: 400;
+  transition: all 0.15s;
+}
+.skill-pill:hover { background: #E1F5EE; border-color: #9FE1CB; color: #085041; }
+.skill-pill.primary { background: #E1F5EE; border-color: #9FE1CB; color: #085041; font-weight: 500; }
+
+.certs-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.cert-card {
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 10px 14px;
+  font-size: 13px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--color-text-primary);
+}
+.cert-icon { font-size: 16px; }
+
+/* ── PROJECTS ── */
+.proj-card {
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.proj-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.proj-name { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.proj-company { font-size: 12px; background: #E1F5EE; color: #085041; padding: 3px 10px; border-radius: 20px; }
+.proj-date { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; }
+.proj-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+
+/* ── ACHIEVEMENTS ── */
+.ach-list { display: flex; flex-direction: column; gap: 10px; }
+.ach-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+.ach-icon { font-size: 18px; flex-shrink: 0; }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.contact-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 14px;
+}
+.contact-icon { width: 36px; height: 36px; border-radius: 50%; background: #E1F5EE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-icon svg { width: 16px; height: 16px; color: #1D9E75; }
+.contact-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px; }
+.contact-value { font-size: 13px; color: var(--color-text-primary); font-weight: 400; }
+
+/* ── SECTION HEADER ── */
+.sec-header { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+.sec-header::after { content: ''; flex: 1; height: 0.5px; background: var(--color-border-tertiary); }
+
+/* ── UPLOAD OVERLAY ── */
+.upload-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+}
+.upload-overlay.show { display: flex; }
+.upload-modal {
+  background: var(--color-background-primary);
+  border-radius: var(--border-radius-lg);
+  border: 0.5px solid var(--color-border-secondary);
+  padding: 32px;
+  width: 380px;
+  text-align: center;
+}
+.upload-modal h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--color-text-primary); }
+.upload-modal p { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 20px; }
+.drop-zone {
+  border: 1.5px dashed var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 32px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 16px;
+}
+.drop-zone:hover, .drop-zone.drag { border-color: #1D9E75; background: #E1F5EE; }
+.drop-zone-icon { font-size: 28px; margin-bottom: 10px; }
+.drop-zone-text { font-size: 13px; color: var(--color-text-secondary); }
+.drop-zone-text span { color: #1D9E75; font-weight: 500; cursor: pointer; }
+#fileInput { display: none; }
+.modal-actions { display: flex; gap: 10px; justify-content: center; }
+.btn-cancel { background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: 8px; padding: 9px 20px; font-size: 13px; cursor: pointer; color: var(--color-text-secondary); font-family: 'DM Sans', sans-serif; }
+.btn-confirm { background: #1D9E75; border: none; border-radius: 8px; padding: 9px 20px; font-size: 13px; cursor: pointer; color: #fff; font-family: 'DM Sans', sans-serif; display: none; }
+.btn-confirm.show { display: inline-block; }
+.upload-status { font-size: 13px; color: #1D9E75; margin-top: 10px; font-weight: 500; }
+</style>
+
+<div class="portfolio">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-avatar" id="heroAvatar">SC</div>
+    <div class="hero-text">
+      <div class="hero-name">Sahil Choudhary</div>
+      <div class="hero-title">MCA Student · Flutter & Python Developer</div>
+      <div class="hero-badges">
+        <span class="badge">Python</span>
+        <span class="badge">Flutter</span>
+        <span class="badge">Android</span>
+        <span class="badge">Chandigarh University</span>
+      </div>
+    </div>
+    <button class="upload-btn" onclick="showUpload()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Update Resume
+    </button>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('about', this)">About</div>
+    <div class="tab" onclick="showTab('education', this)">Education</div>
+    <div class="tab" onclick="showTab('skills', this)">Skills</div>
+    <div class="tab" onclick="showTab('projects', this)">Projects</div>
+    <div class="tab" onclick="showTab('achievements', this)">Achievements</div>
+    <div class="tab" onclick="showTab('contact', this)">Contact</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- ABOUT -->
+    <div class="section active" id="about">
+      <div class="sec-header">Professional summary</div>
+      <div class="summary-box">
+        <p>Motivated and goal-oriented student with a strong academic record and a commitment to personal and professional development. Possesses excellent time management skills and the ability to handle challenges effectively.</p>
+      </div>
+      <div class="sec-header">Personal details</div>
+      <div class="about-grid">
+        <div class="info-card"><div class="info-label">Full Name</div><div class="info-value">Sahil Choudhary</div></div>
+        <div class="info-card"><div class="info-label">Date of Birth</div><div class="info-value">15 June 2002</div></div>
+        <div class="info-card"><div class="info-label">Age</div><div class="info-value">23 Years</div></div>
+        <div class="info-card"><div class="info-label">Nationality</div><div class="info-value">Indian</div></div>
+        <div class="info-card"><div class="info-label">Languages</div><div class="info-value">Hindi, English</div></div>
+        <div class="info-card"><div class="info-label">Marital Status</div><div class="info-value">Unmarried</div></div>
+      </div>
+
+      <div class="sec-header" style="margin-top:24px;">SWOT analysis</div>
+      <div class="swot-grid">
+        <div class="swot-card S"><div class="swot-label">Strengths</div><ul>
+          <li>Proficient in Python, Android, Flutter</li>
+          <li>Strong consistent academic record</li>
+          <li>Certified in Python</li>
+        </ul></div>
+        <div class="swot-card W"><div class="swot-label">Weaknesses</div><ul>
+          <li>Limited real-world industry exposure</li>
+          <li>Time management under tight deadlines</li>
+        </ul></div>
+        <div class="swot-card O"><div class="swot-label">Opportunities</div><ul>
+          <li>MCA providing advanced technical training</li>
+          <li>Internships, tech fests & certifications</li>
+        </ul></div>
+        <div class="swot-card T"><div class="swot-label">Threats</div><ul>
+          <li>Rapidly changing technology landscape</li>
+          <li>Competitive job market expectations</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="section" id="education">
+      <div class="sec-header">Academic journey</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Master of Computer Applications (MCA)</div>
+          <div class="tl-sub">Chandigarh University, Gharuan</div>
+          <div class="tl-meta"><span class="tl-tag highlight">2024 – 2026</span><span class="tl-tag">Pursuing</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#9FE1CB;"></div>
+          <div class="tl-title">B.Sc. with Computer Science</div>
+          <div class="tl-sub">SCVB College Palampur, H.P.</div>
+          <div class="tl-meta"><span class="tl-tag">2019 – 2023</span><span class="tl-tag highlight">70%</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#B4B2A9;"></div>
+          <div class="tl-title">Intermediate – H.P. Board</div>
+          <div class="tl-sub">Govt. Sr. Sec. School, Daroh, H.P.</div>
+          <div class="tl-meta"><span class="tl-tag">2018 – 2019</span><span class="tl-tag highlight">78.4%</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#B4B2A9;"></div>
+          <div class="tl-title">Matriculation – H.P. Board</div>
+          <div class="tl-sub">Govt. Sr. Sec. School, Daroh, H.P.</div>
+          <div class="tl-meta"><span class="tl-tag">2016 – 2017</span><span class="tl-tag highlight">87.6%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section" id="skills">
+      <div class="sec-header">Technical competencies</div>
+      <div class="skills-wrap">
+        <span class="skill-pill primary">Python</span>
+        <span class="skill-pill primary">Flutter</span>
+        <span class="skill-pill primary">Android Development</span>
+        <span class="skill-pill">App Development</span>
+        <span class="skill-pill">Hospital Management Systems</span>
+        <span class="skill-pill">Project Management</span>
+      </div>
+      <div class="sec-header" style="margin-top:24px;">Interests & hobbies</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">Reading</span>
+        <span class="skill-pill">Cooking</span>
+        <span class="skill-pill">Writing</span>
+      </div>
+      <div class="sec-header" style="margin-top:24px;">Certifications</div>
+      <div class="certs-row">
+        <div class="cert-card"><span class="cert-icon">🏅</span>Python Certification</div>
+        <div class="cert-card"><span class="cert-icon">🏅</span>Flutter Certification</div>
+        <div class="cert-card"><span class="cert-icon">🏅</span>Internship in App Development</div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section" id="projects">
+      <div class="sec-header">Training & projects</div>
+      <div class="proj-card">
+        <div class="proj-header"><span class="proj-name">Artifect</span><span class="proj-company">KindleBit Pvt. Ltd.</span></div>
+        <div class="proj-date">Jan 25, 2024 · Role: Employee</div>
+        <div class="proj-desc">Contributed to the development of the Artifect project as a full-time employee at KindleBit Pvt. Ltd., applying skills in modern app development frameworks.</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-header"><span class="proj-name">HMS – Hospital Management System</span><span class="proj-company">Space Window Pvt. Ltd.</span></div>
+        <div class="proj-date">Feb 14, 2023 · Role: Student Intern</div>
+        <div class="proj-desc">Designed and developed a Hospital Management System in Python during an internship, covering patient records, appointment scheduling, and administrative workflows.</div>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="section" id="achievements">
+      <div class="sec-header">Extra-curricular highlights</div>
+      <div class="ach-list">
+        <div class="ach-item"><span class="ach-icon">🏆</span>Awarded Best NSS Volunteer</div>
+        <div class="ach-item"><span class="ach-icon">🥇</span>District Level Champion – Basketball</div>
+        <div class="ach-item"><span class="ach-icon">🏀</span>State Level Player – Basketball</div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section" id="contact">
+      <div class="sec-header">Get in touch</div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="contact-label">Email</div><div class="contact-value">sahil0000000700@gmail.com</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-3-8.82A2 2 0 012.22 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.32 6.32l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div><div class="contact-label">Mobile</div><div class="contact-value">+91 8351989822</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="contact-label">Location</div><div class="contact-value">Palampur, H.P., India</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+          <div><div class="contact-label">LinkedIn</div><div class="contact-value">Sahil Choudhary</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- UPLOAD MODAL (normal flow, not fixed) -->
+<div id="uploadOverlay" style="display:none; background:rgba(0,0,0,0.45); border-radius:var(--border-radius-lg); padding:60px 20px; margin-top:16px; align-items:center; justify-content:center;">
+  <div class="upload-modal">
+    <h3>Update your portfolio</h3>
+    <p>Upload your updated resume (PDF or image) to refresh this portfolio automatically.</p>
+    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <div class="drop-zone-icon">📄</div>
+      <div class="drop-zone-text">Drop your resume here or <span>browse files</span></div>
+    </div>
+    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFile(this.files[0])"/>
+    <div class="upload-status" id="uploadStatus"></div>
+    <div class="modal-actions" style="margin-top:16px;">
+      <button class="btn-cancel" onclick="hideUpload()">Cancel</button>
+      <button class="btn-confirm" id="btnConfirm" onclick="confirmUpload()">Apply changes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+
+function showUpload() {
+  const ov = document.getElementById('uploadOverlay');
+  ov.style.display = 'flex';
+}
+
+function hideUpload() {
+  document.getElementById('uploadOverlay').style.display = 'none';
+  document.getElementById('uploadStatus').textContent = '';
+  document.getElementById('btnConfirm').classList.remove('show');
+  document.getElementById('dropZone').classList.remove('drag');
+}
+
+let selectedFile = null;
+
+function handleFile(file) {
+  if (!file) return;
+  selectedFile = file;
+  document.getElementById('uploadStatus').textContent = '✓ ' + file.name + ' ready to upload';
+  document.getElementById('btnConfirm').classList.add('show');
+}
+
+function confirmUpload() {
+  if (!selectedFile) return;
+  const status = document.getElementById('uploadStatus');
+  status.textContent = 'Uploading...';
+
+  if (selectedFile.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const avatar = document.getElementById('heroAvatar');
+      avatar.innerHTML = '<img src="' + e.target.result + '" alt="Profile"/>';
+      status.textContent = '✓ Photo updated!';
+      setTimeout(hideUpload, 1200);
+    };
+    reader.readAsDataURL(selectedFile);
+  } else {
+    status.textContent = '✓ Resume received! Refresh your portfolio with the updated file.';
+    setTimeout(() => {
+      hideUpload();
+      sendPrompt('I uploaded an updated resume. Please parse it and update my portfolio accordingly.');
+    }, 1000);
+  }
+}
+
+const dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+});
+</script>
